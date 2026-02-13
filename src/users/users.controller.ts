@@ -11,13 +11,15 @@ import { UsersService } from './users.service';
 import { User } from './user.entity';
 import { UseGuards, Req, ForbiddenException } from '@nestjs/common';
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';
+import { CreateUserDto } from './dto/create-user.dto';
+import { UpdateUserDto } from './dto/update-user.dto';
 
 @Controller('users')
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}
 
   @Post()
-  create(@Body() body: Partial<User>) {
+  create(@Body() body: CreateUserDto) {
     return this.usersService.create(body);
   }
 
@@ -28,7 +30,7 @@ export class UsersController {
 
   @UseGuards(JwtAuthGuard)
   @Patch(':id')
-  update(@Req() req, @Param('id') id: string, @Body() body: any) {
+  update(@Req() req, @Param('id') id: string, @Body() body: UpdateUserDto) {
     const userIdFromToken = req.user.userId;
     const userIdFromParam = +id;
 
