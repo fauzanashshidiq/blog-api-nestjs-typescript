@@ -53,23 +53,16 @@ Each module follows layered separation:
 #### Why This Pattern?
 
 1. Separation of concerns
-
 2. Scalable for larger applications
-
 3. Easy to test (unit & e2e)
-
 4. Commonly used in real-world NestJS projects
-
 5. Follows clean architecture principles
-
-This structure makes the project maintainable and production-ready.
+   This structure makes the project maintainable and production-ready.
 
 ## Authentication Flow
 
 1. User registers
-
 2. User logs in
-
 3. Server returns JWT token
 
 Token must be sent in header:
@@ -95,6 +88,7 @@ DB_PORT=5432
 DB_USERNAME=postgres
 DB_PASSWORD=yourpassword
 DB_DATABASE=blog_api_db
+
 JWT_SECRET=your_jwt_secret
 JWT_EXPIRES_IN=1d
 ```
