@@ -35,11 +35,13 @@ Each feature (Users, Articles, Comments, Auth) is separated into its own module.
 
 Structure example:
 
+```
 src/
 ├── users/
 ├── articles/
 ├── comments/
 ├── auth/
+```
 
 Each module follows layered separation:
 
