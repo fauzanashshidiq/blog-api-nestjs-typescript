@@ -1,5 +1,12 @@
-import { Entity, PrimaryGeneratedColumn, Column, ManyToOne } from 'typeorm';
+import {
+  Entity,
+  PrimaryGeneratedColumn,
+  Column,
+  ManyToOne,
+  OneToMany,
+} from 'typeorm';
 import { User } from '../users/user.entity';
+import { Comment } from '../comments/comment.entity';
 
 @Entity()
 export class Article {
@@ -14,4 +21,7 @@ export class Article {
 
   @ManyToOne(() => User, (user) => user.articles, { onDelete: 'CASCADE' })
   user: User;
+
+  @OneToMany(() => Comment, (comment) => comment.user)
+  comments: Comment[];
 }
