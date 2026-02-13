@@ -1,4 +1,8 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import {
+  Injectable,
+  NotFoundException,
+  ForbiddenException,
+} from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Article } from './article.entity';
@@ -31,5 +35,43 @@ export class ArticlesService {
 
   async findAll() {
     return this.articleRepository.find({ relations: ['user'] });
+  }
+
+  async update(userId: number, articleId: number, data: Partial<Article>) {
+    const article = await this.articleRepository.findOne({
+      where: { id: articleId },
+      relations: ['user'],
+    });
+
+    if (!article) {
+      throw new NotFoundException('Article not found');
+    }
+
+    if (article.user.id !== userId) {
+      throw new ForbiddenException('You cannot edit this article');
+    }
+
+    Object.assign(article, data);
+
+    return this.articleRepository.save(article);
+  }
+
+  async remove(userId: number, articleId: number) {
+    const article = await this.articleRepository.findOne({
+      where: { id: articleId },
+      relations: ['user'],
+    });
+
+    if (!article) {
+      throw new NotFoundException('Article not found');
+    }
+
+    if (article.user.id !== userId) {
+      throw new ForbiddenException('You cannot delete this article');
+    }
+
+    await this.articleRepository.remove(article);
+
+    return { message: 'Article deleted successfully' };
   }
 }
