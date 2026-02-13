@@ -137,10 +137,10 @@ Endpoint:
 - `POST /users` → Create user
 - `POST /auth/login` → Login user
 - `PATCH /users` → Edit user (use Bearer Token, get from login)
-- `DELETE /users/1` → Delete user (use Bearer Token, get from login)
+- `DELETE /users/:id` → Delete user (use Bearer Token, get from login)
 - `POST /articles` → Create article (use Bearer Token, get from login)
-- `PATCH /articles/1` → Edit article (use Bearer Token, get from login)
-- `DELETE /articles/1` → Delete article (use Bearer Token, get from login)
-- `CREATE /comments/1` → Create comment by article (use Bearer Token, get from login)
-- `READ /comments/1` → Read comment by article
-- `DELETE /comments/1` → Delete comment by id_comment (use Bearer Token, get from login)
+- `PATCH /articles/:id` → Edit article (use Bearer Token, get from login)
+- `DELETE /articles/:id` → Delete article (use Bearer Token, get from login)
+- `CREATE /comments/articleId` → Create comment by article (use Bearer Token, get from login)
+- `READ /comments/articleId` → Read comment by article
+- `DELETE /comments/:id` → Delete comment by id_comment (use Bearer Token, get from login)
