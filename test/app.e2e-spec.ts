@@ -17,11 +17,12 @@ describe('Auth & Protected Routes (e2e)', () => {
   });
 
   it('should register a new user', async () => {
+    const testEmail = `test${Date.now()}@example.com`;
     await request(app.getHttpServer())
       .post('/users')
       .send({
         name: 'Test User',
-        email: 'test@example.com',
+        email: testEmail,
         password: 'password123',
       })
       .expect(201);
